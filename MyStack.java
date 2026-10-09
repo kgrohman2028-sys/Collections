@@ -1,3 +1,4 @@
+import java.util.EmptyStackException;
 
 /**
  * Makes a stack based off an Array
@@ -35,20 +36,30 @@ public class MyStack {
      * Pushes an element on to the stack.
      * 
      * @param element Item to be added to the stack.
+     * @throws IllegalStateException when stack is full.
      */
     public void push(int element) {
-        arr[idx] = element;
-        idx++;
+        if(!isFull()) {
+            arr[idx] = element;
+            idx++;
+        } else {
+            throw new IllegalStateException("Stack is full");
+        }
     }
     
     /**
      * Pops an element off of the stack.
      * 
      * @return element on top of the stack and removes it.
+     * @throws EmptyStackException when the stack is empty.
      */
     public int pop() {
-        idx--;
-        return arr[idx];
+        if (!isEmpty()) { 
+            idx--;
+            return arr[idx];
+        } else {
+            throw new EmptyStackException();
+        }
     }
     
     /**
@@ -73,9 +84,14 @@ public class MyStack {
      * Reads the element at the top of the stack.
      * 
      * @return element on top of the stack.
+     * @throws EmptyStackException when the stack is empty.
      */
     public int top() {
-        return arr[idx-1];
+        if (!isEmpty()) { 
+            return arr[idx - 1];
+        } else {
+            throw new EmptyStackException();
+        }
     }
     
     /**

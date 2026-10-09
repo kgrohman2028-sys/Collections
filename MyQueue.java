@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 
 /**
  * Write a description of class MyQueue here.
@@ -9,7 +10,7 @@ public class MyQueue
 {
     // instance variables - replace the example below with your own
     private int beg;
-    private int end;
+    private int size;
     private int maxSize;
     private int[] arr;
 
@@ -18,7 +19,7 @@ public class MyQueue
      */
     public MyQueue() {
         beg = 0;
-        end = -1;
+        size = 0;
         maxSize = 100;
         arr = new int[100];
     }
@@ -30,7 +31,7 @@ public class MyQueue
      */
     public MyQueue(int maxSize) {
         beg = 0;
-        end = -1;
+        size = 0;
         this.maxSize = maxSize;
         arr = new int[maxSize];
     }
@@ -39,14 +40,16 @@ public class MyQueue
      * Adds an element to the back of the queue.
      *
      * @param element Elelmet to be added to the queue.
+     * @throws IllegalStateException when Queue is full.
      */
     public void enqueue(int element) {
-        if (!isFull()) {
-            end++; 
-            end = end % maxSize;
-            arr[end] = element; 
+        if (!isFull()) { 
+            arr[(beg + size) % maxSize] = element;
+            if(size < maxSize){
+                size++;
+            }
         } else {
-            throw new Error();
+            throw new IllegalStateException("Queue is full");
         }
     }
     
@@ -54,15 +57,17 @@ public class MyQueue
      * removes an element from the front of the queue.
      *
      * @returns element Elelmet to be added to the queue.
+     * @throws NoSuchElementException  when the the queue is empty.
      */
     public int dequeue() {
         if (!isEmpty()) {
             int temp = arr[beg];
             beg++;
             beg = beg % maxSize;
+            size--;
             return temp;
         } else {
-            return -1;
+            throw new NoSuchElementException("Queue is Empty");
         }
     }
     
@@ -88,23 +93,28 @@ public class MyQueue
      * Reads the element at the front of the queue.
      * 
      * @return element on front of the queue.
+     * @throws NoSuchElementException  when the the queue is empty.
      */
     public int front() {
         if(!isEmpty()){
             return arr[beg];
         } else {
-            //ERR
-            return -1;
+            throw new NoSuchElementException("Queue is Empty");
         }
     }
     
+    /**
+     * Returns the number of elements stored in the queue.
+     * 
+     * @return size of the queue.
+     */
     public int size() {
-        return maxSize +1 - (beg - end);
+        return size;
     }
 
     public String toString() {
         String temp = "";
-        for(int i = beg; i < end + 1; i++) {
+        for(int i = beg; i < size; i++) {
             temp += arr[i] +", ";
         }
         return temp;
