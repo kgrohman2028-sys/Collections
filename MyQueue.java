@@ -1,18 +1,18 @@
 import java.util.NoSuchElementException;
 
 /**
- * Write a description of class MyQueue here.
+ * Makes a circular queue based off an Array
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Keegan
+ * @version 1
+ * @param E the type of elements in the queue
  */
-public class MyQueue
-{
+public class MyQueue<E> {
     // instance variables - replace the example below with your own
     private int beg;
     private int size;
     private int maxSize;
-    private int[] arr;
+    private E[] arr;
 
     /**
      * Constructs a queue that can hold 100 elements.
@@ -21,7 +21,7 @@ public class MyQueue
         beg = 0;
         size = 0;
         maxSize = 100;
-        arr = new int[100];
+        arr = (E[]) new Object[100];
     }
     
     /**
@@ -33,7 +33,7 @@ public class MyQueue
         beg = 0;
         size = 0;
         this.maxSize = maxSize;
-        arr = new int[maxSize];
+        arr = (E[]) new Object[maxSize];
     }
 
     /**
@@ -42,10 +42,10 @@ public class MyQueue
      * @param element Elelmet to be added to the queue.
      * @throws IllegalStateException when Queue is full.
      */
-    public void enqueue(int element) {
+    public void enqueue(E element) {
         if (!isFull()) { 
             arr[(beg + size) % maxSize] = element;
-            if(size < maxSize){
+            if (size < maxSize) {
                 size++;
             }
         } else {
@@ -59,9 +59,10 @@ public class MyQueue
      * @returns element Elelmet to be added to the queue.
      * @throws NoSuchElementException  when the the queue is empty.
      */
-    public int dequeue() {
+    public E dequeue() {
         if (!isEmpty()) {
-            int temp = arr[beg];
+            E temp = arr[beg];
+            arr[beg] = null;
             beg++;
             beg = beg % maxSize;
             size--;
@@ -95,8 +96,8 @@ public class MyQueue
      * @return element on front of the queue.
      * @throws NoSuchElementException  when the the queue is empty.
      */
-    public int front() {
-        if(!isEmpty()){
+    public E front() {
+        if (!isEmpty()) {
             return arr[beg];
         } else {
             throw new NoSuchElementException("Queue is Empty");
@@ -114,8 +115,19 @@ public class MyQueue
 
     public String toString() {
         String temp = "";
-        for(int i = beg; i < size; i++) {
-            temp += arr[i] +", ";
+        for (int i = beg; i < size; i++) {
+            if (i == size - 1 && beg == 0) {
+                temp += arr[i];
+            } else {
+                temp += arr[i] +", ";
+            }
+        }
+        for (int i = 0; i < beg; i++) {
+            if (i == beg - 1){
+                temp += arr[i];
+            } else {
+                temp += arr[i] +", ";
+            }
         }
         return temp;
     }

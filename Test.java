@@ -25,16 +25,97 @@ public class Test
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
-    public static void sampleMethod()
-    {
+    public static void testQueue() {
         // put your code here
-        MyQueue q = new MyQueue(3);
-        q.enqueue(1);
-        q.enqueue(2);
-        q.enqueue(3);
-        System.out.println(q.size());
-        q.dequeue();
-        q.enqueue(4);
-        System.out.println(q.size());
+        try {
+            MyQueue q = new MyQueue<Integer>(3);
+            q.dequeue();
+        } catch (Exception e) {
+            System.out.println("empty");
+        }
+        
+        try {
+            MyQueue q = new MyQueue<Integer>(3);
+            q.front();
+        } catch (Exception e) {
+            System.out.println("empty");
+        }
+        
+        try {
+            MyQueue q = new MyQueue<Integer>(3);
+            q.enqueue(1);
+            q.enqueue(2);
+            q.enqueue(3);
+            System.out.println(q);
+            q.dequeue();
+            q.enqueue(4);
+            System.out.println(q);
+            q.enqueue(9);
+        } catch (Exception e) {
+            System.out.println("full");
+        }
+    }
+    public static void testStack() {
+        // put your code here
+        try {
+            MyStack q = new MyStack<Integer>(3);
+            q.pop();
+        } catch (Exception e) {
+            System.out.println("empty");
+        }
+        
+        try {
+            MyStack q = new MyStack<Integer>(3);
+            q.top();
+        } catch (Exception e) {
+            System.out.println("empty");
+        }
+        
+        try {
+            MyStack q = new MyStack<Integer>(3);
+            q.push(1);
+            q.push(2);
+            q.push(3);
+            System.out.println(q);
+            q.pop();
+            q.push(4);
+            System.out.println(q);
+            q.push(9);
+            q.push(5);
+            System.out.println(q.size());
+        } catch (Exception e) {
+            System.out.println("full");
+        }
+    }
+    
+    public static void testLL() {
+        // put your code here
+        try {
+            LinkedList q = new LinkedList<Integer>();
+            q.removeHead();
+        } catch (Exception e) {
+            System.out.println("empty");
+        }
+        
+        try {
+            LinkedList q = new LinkedList<Integer>();
+            q.getHead();
+        } catch (Exception e) {
+            System.out.println("empty");
+        }
+        
+        try {
+            LinkedList q = new LinkedList<Integer>();
+            q.addHead(2);
+            q.addTail(3);
+            q.addTail(4);
+            q.addHead(1);
+            q.addHead(0);
+            System.out.println(q.removeHead() == (Integer) 0);
+            System.out.println(q);
+            System.out.println(q.toString().equals("1, 2, 3, 4"));
+        } catch (Exception e) {
+            System.out.println("full");
+        }
     }
 }

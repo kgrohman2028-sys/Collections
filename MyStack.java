@@ -5,10 +5,11 @@ import java.util.EmptyStackException;
  *
  * @author Geegan Krohman
  * @version 1
+ * @param E the type of elements in the stack
  */
-public class MyStack {
+public class MyStack<E> {
     
-    private int[] arr;
+    private E[] arr;
     //stores the value of the next empty index
     private int idx;
     
@@ -18,7 +19,7 @@ public class MyStack {
     public MyStack() {
         // initialise instance variables
         idx = 0;
-        arr = new int[100];
+        arr = (E[]) new Object[100];
     }
     
     /**
@@ -29,7 +30,7 @@ public class MyStack {
     public MyStack(int maxSize) {
         // initialise instance variables
         idx = 0;
-        arr = new int[maxSize];
+        arr = (E[]) new Object[maxSize];
     }
 
     /**
@@ -38,8 +39,8 @@ public class MyStack {
      * @param element Item to be added to the stack.
      * @throws IllegalStateException when stack is full.
      */
-    public void push(int element) {
-        if(!isFull()) {
+    public void push(E element) {
+        if (!isFull()) {
             arr[idx] = element;
             idx++;
         } else {
@@ -53,10 +54,12 @@ public class MyStack {
      * @return element on top of the stack and removes it.
      * @throws EmptyStackException when the stack is empty.
      */
-    public int pop() {
+    public E pop() {
         if (!isEmpty()) { 
             idx--;
-            return arr[idx];
+            E temp = arr[idx];
+            arr[idx] = null;
+            return temp;
         } else {
             throw new EmptyStackException();
         }
@@ -86,7 +89,7 @@ public class MyStack {
      * @return element on top of the stack.
      * @throws EmptyStackException when the stack is empty.
      */
-    public int top() {
+    public E top() {
         if (!isEmpty()) { 
             return arr[idx - 1];
         } else {
