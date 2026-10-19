@@ -36,8 +36,8 @@ public class LinkedList<E> {
         } else {
             Node node = new Node<E>(element, head);
             head = node;
-            length++;
         }
+        length++;
     }
     
     /**
@@ -55,8 +55,8 @@ public class LinkedList<E> {
             Node node = new Node<E>(element, null);
             tail.setNext(node);
             tail = node;
-            length++;
         }
+        length++;
     }
     
     /**
