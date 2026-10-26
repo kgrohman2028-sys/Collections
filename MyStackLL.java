@@ -9,13 +9,13 @@ import java.util.EmptyStackException;
  */
 public class MyStackLL<E> {
     
-    private LinkedList<E> arr;
+    private MyLinkedList<E> arr;
     
     /**
      * Constructs a dynamic stack.
      */
     public MyStackLL() {
-        arr = new LinkedList<E>();
+        arr = new MyLinkedList<E>();
     }
 
     /**

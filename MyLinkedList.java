@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class LinkedList<E> {
+public class MyLinkedList<E> {
     
     private int length;
     private Node head;
@@ -15,7 +15,7 @@ public class LinkedList<E> {
     /**
      * Constructor for objects of class LinkedList.
      */
-    public LinkedList() {
+    public MyLinkedList() {
         // initialise instance variables
         length = 0;
         tail = null;
@@ -68,6 +68,15 @@ public class LinkedList<E> {
     public E removeHead(){
         if (tail == null && head == null ) {
             throw new NoSuchElementException();
+        } else if (head == tail) {
+            E tempEle = (E) head.getElement();
+            head.setElement(null);
+            Node tempNext = head.getNext();
+            head.setNext(null);
+            head = null;
+            tail = null;
+            length--;
+            return tempEle;
         } else {
             E tempEle = (E) head.getElement();
             head.setElement(null);

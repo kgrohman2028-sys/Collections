@@ -9,13 +9,13 @@ import java.util.NoSuchElementException;
  */
 public class MyQueueLL<E> {
     // instance variables - replace the example below with your own
-     private LinkedList<E> arr;
+     private MyLinkedList<E> arr;
 
     /**
      * Constructs a dynamic queue.
      */
     public MyQueueLL() {
-        arr = new LinkedList<E>();
+        arr = new MyLinkedList<E>();
     }
 
     /**

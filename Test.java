@@ -207,21 +207,21 @@ public class Test
     public static void testLL() {
         // put your code here
         try {
-            LinkedList q = new LinkedList<Integer>();
+            MyLinkedList q = new MyLinkedList<Integer>();
             q.removeHead();
         } catch (Exception e) {
             System.out.println("empty");
         }
         
         try {
-            LinkedList q = new LinkedList<Integer>();
+            MyLinkedList q = new MyLinkedList<Integer>();
             q.getHead();
         } catch (Exception e) {
             System.out.println("empty");
         }
         
         try {
-            LinkedList q = new LinkedList<Integer>();
+            MyLinkedList q = new MyLinkedList<Integer>();
             q.addHead(2);
             q.addTail(3);
             q.addTail(4);
