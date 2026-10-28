@@ -29,7 +29,7 @@ public class MyLinkedList<E> {
      * @return the sum of x and y
      */
     public void addHead(E element) {
-        if (tail == null && head == null ) {
+        if (isEmpty()) {
             Node node = new Node<E>(element, null);
             tail = node;
             head = node;
@@ -47,7 +47,7 @@ public class MyLinkedList<E> {
      * @return the sum of x and y
      */
     public void addTail(E element) {
-        if (tail == null && head == null ) {
+        if (isEmpty()) {
             Node node = new Node<E>(element, null);
             tail = node;
             head = node;
@@ -66,7 +66,7 @@ public class MyLinkedList<E> {
      * @return the removed elelmet.
      */
     public E removeHead(){
-        if (tail == null && head == null ) {
+        if (isEmpty()) {
             throw new NoSuchElementException();
         } else if (head == tail) {
             E tempEle = (E) head.getElement();
@@ -91,11 +91,10 @@ public class MyLinkedList<E> {
     /**
      * Returns element at beginning of list.
      *
-     * @param element element to be added.
      * @return element at beginning of list.
      */
     public E getHead(){
-        if (tail == null && head == null) {
+        if (isEmpty()) {
             throw new NoSuchElementException();
         } else {
             return (E) head.getElement();
@@ -108,7 +107,7 @@ public class MyLinkedList<E> {
      * @return {@code true} if the list is empty; {@code false} otherwise.
      */
     public boolean isEmpty(){
-        return tail == null && head == null;
+        return length == 0;
     }
     
     /**
