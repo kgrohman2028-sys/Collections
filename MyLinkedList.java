@@ -68,7 +68,7 @@ public class MyLinkedList<E> {
     public E removeHead(){
         if (isEmpty()) {
             throw new NoSuchElementException();
-        } else if (head == tail) {
+        } else if (length == 1) {
             E tempEle = (E) head.getElement();
             head.setElement(null);
             Node tempNext = head.getNext();
