@@ -113,8 +113,8 @@ public class MyStack<E> {
      */
     public String toString() {
         String cat = "";
-        for (int i = idx-1; i >= 0; i--){
-            if (i == 0){
+        for (int i = idx-1; i >= 0; i--) {
+            if (i == 0) {
                 cat += arr[i];
             } else {
                 cat += arr[i] + ", ";
