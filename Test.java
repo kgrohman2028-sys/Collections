@@ -234,4 +234,38 @@ public class Test
             System.out.println("full");
         }
     }
+    public static void testQueueReverse(){
+        MyQueueLL q = new MyQueueLL<Integer>();
+        q.enqueue(1);
+        q.enqueue(2);
+        q.enqueue(3);
+        System.out.println();
+        q.dequeue();
+        q.enqueue(4);
+        q.enqueue(9);
+        q.enqueue(10);
+        q.enqueue(11);
+        System.out.println(q);
+        Applications.reverse(q);
+        System.out.println(q);
+    }
+    public static void testLinter(){
+        String code = "{}";
+        System.out.println(Applications.checkSyntax(code));
+        code = "({})";
+        System.out.println(Applications.checkSyntax(code));
+        code = "<({[]})>";
+        System.out.println(Applications.checkSyntax(code));
+        code = "";
+        System.out.println(Applications.checkSyntax(code));
+        code = "I hate{ because he is } and like e< www > oh my great g()()gly moogly";
+        System.out.println(Applications.checkSyntax(code));
+        System.out.println("now print false");
+        code = "{{";
+        System.out.println(Applications.checkSyntax(code));
+        code = "}}";
+        System.out.println(Applications.checkSyntax(code));
+        code = "<({[>})>";
+        System.out.println(Applications.checkSyntax(code));
+    }
 }

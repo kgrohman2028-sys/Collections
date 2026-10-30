@@ -62,7 +62,6 @@ public class MyLinkedList<E> {
     /**
      * Removes and returns element at beginning of list.
      *
-     * @param element element to be added.
      * @return the removed elelmet.
      */
     public E removeHead(){
