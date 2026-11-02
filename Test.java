@@ -268,4 +268,19 @@ public class Test
         code = "<({[>})>";
         System.out.println(Applications.checkSyntax(code));
     }
+    public static void testPostfix(){
+        System.out.println("print true");
+        String code = "1 2 +";
+        System.out.println(Applications.evalPostfix(code) == 3.0 ? true : false);
+        code = "5 2 -";
+        System.out.println(Applications.evalPostfix(code) == 3.0 ? true : false);
+        code = "1 3 *";
+        System.out.println(Applications.evalPostfix(code) == 3.0 ? true : false);
+        code = "6 2 /";
+        System.out.println(Applications.evalPostfix(code) == 3.0 ? true : false);
+        code = "7 2 /";
+        System.out.println(Applications.evalPostfix(code) == 3.5 ? true : false);
+        code = "1 24 6 / -";
+        System.out.println(Applications.evalPostfix(code) == -3 ? true : false);
+    }
 }
