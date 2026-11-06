@@ -5,7 +5,7 @@
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Test
+public class Keegauntlet
 {
     // instance variables - replace the example below with your own
     private int x;
@@ -13,12 +13,6 @@ public class Test
     /**
      * Constructor for objects of class Test
      */
-    public Test()
-    {
-        // initialise instance variables
-        x = 0;
-    }
-
     /**
      * An example of a method - replace this comment with your own
      *
@@ -282,5 +276,62 @@ public class Test
         System.out.println(Applications.evalPostfix(code) == 3.5 ? true : false);
         code = "1 24 6 / -";
         System.out.println(Applications.evalPostfix(code) == -3 ? true : false);
+    }
+    
+    public static void testRLL() {
+        // put your code here
+        try {
+            MyRobustLinkedList q = new MyRobustLinkedList<Integer>();
+            q.removeHead();
+        } catch (Exception e) {
+            System.out.println("empty");
+        }
+        
+        try {
+            MyRobustLinkedList q = new MyRobustLinkedList<Integer>();
+            q.getHead();
+        } catch (Exception e) {
+            System.out.println("empty");
+        }
+        
+        try {
+            MyRobustLinkedList q = new MyRobustLinkedList<Integer>();
+            q.addHead(2);
+            q.addTail(3);
+            q.addTail(4);
+            q.addHead(1);
+            q.addHead(0);
+            System.out.println(q.removeHead() == (Integer) 0);
+            System.out.println(q);
+            System.out.println(q.toString().equals("1, 2, 3, 4"));
+        } catch (Exception e) {
+            System.out.println("full");
+        }
+        
+        try {
+            MyRobustLinkedList q = new MyRobustLinkedList<Integer>();
+            q.add(1);
+            q.add(2);
+            q.add(3);
+            System.out.println(q.toString().equals("1, 2, 3"));
+            q.remove(2);
+            System.out.println(q.toString().equals("1, 2"));
+            q.add(3);
+            System.out.println(q.toString().equals("1, 2, 3"));
+            q.remove(0);
+            System.out.println(q.toString().equals("2, 3"));
+            q.add(0,1);
+            System.out.println(q.toString().equals("1, 2, 3"));
+            q.set(1,3);
+            q.set(2,4);
+            q.add(1,2);
+            System.out.println(q.toString());
+            System.out.println(q.toString().equals("1, 2, 3, 4"));
+            System.out.println( "get" + (q.get(0) == (Integer) 1));
+            System.out.println(q.get(1) == (Integer) 2);
+            System.out.println(q.get(3) == (Integer) 4);
+        } catch (Exception e) {
+            System.out.println("full");
+        }
     }
 }

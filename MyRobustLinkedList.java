@@ -1,0 +1,228 @@
+import java.util.NoSuchElementException;
+
+/**
+ * Write a description of class LinkedList here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class MyRobustLinkedList<E> {
+    
+    private int length;
+    private Node head;
+    private Node tail;
+
+    /**
+     * Constructor for objects of class LinkedList.
+     */
+    public MyRobustLinkedList() {
+        // initialise instance variables
+        length = 0;
+        tail = null;
+        head = null;
+    }
+
+    /**
+     * Adds element at beginning of list.
+     *
+     * @param element element to be added.
+     * @return the sum of x and y
+     */
+    public void addHead(E element) {
+        if (isEmpty()) {
+            Node node = new Node<E>(element, null);
+            tail = node;
+            head = node;
+        } else {
+            Node node = new Node<E>(element, head);
+            head = node;
+        }
+        length++;
+    }
+    
+    /**
+     * Adds element at end of list.
+     *
+     * @param element element to be added.
+     * @return the sum of x and y
+     */
+    public void addTail(E element) {
+        if (isEmpty()) {
+            Node node = new Node<E>(element, null);
+            tail = node;
+            head = node;
+        } else {
+            Node node = new Node<E>(element, null);
+            tail.setNext(node);
+            tail = node;
+        }
+        length++;
+    }
+    
+    /**
+     * Removes and returns element at beginning of list.
+     *
+     * @return the removed elelmet.
+     */
+    public E removeHead(){
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        } else if (length == 1) {
+            E tempEle = (E) head.getElement();
+            head.setElement(null);
+            Node tempNext = head.getNext();
+            head.setNext(null);
+            head = null;
+            tail = null;
+            length--;
+            return tempEle;
+        } else {
+            E tempEle = (E) head.getElement();
+            head.setElement(null);
+            Node tempNext = head.getNext();
+            head.setNext(null);
+            head = tempNext;
+            length--;
+            return tempEle;
+        }
+    }
+    
+    /**
+     * Returns element at beginning of list.
+     *
+     * @return element at beginning of list.
+     */
+    public E getHead(){
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        } else {
+            return (E) head.getElement();
+        }
+    }
+    
+    /**
+     * Indicates whether the list contains any elements.
+     * 
+     * @return {@code true} if the list is empty; {@code false} otherwise.
+     */
+    public boolean isEmpty(){
+        return length == 0;
+    }
+    
+    /**
+     * Returns the number of elelmets in the list.
+     * 
+     * @return the number of elelmets in the list.
+     */
+    public int size(){
+        return length;
+    }
+    
+    
+    public void add(E element) {
+        addTail(element);
+    }
+    
+    public void add(int index, E element) {
+        if(index == 0) {
+            addHead(element);
+        } else {
+            Node node = head;
+            for (int i = 0; i < index-1; i++) {
+                node = node.getNext();
+            }
+            length++;
+            node.setNext(new Node<E>(element, node.getNext()));
+        }
+    }
+    
+    public E get(int index) {
+        Node node = head;
+        for (int i = 0; i < index; i++) {
+                node = node.getNext();
+        }
+        return (E) node.getElement();
+    }
+    
+    public void set(int index, E element) {
+        if(index == 0) { 
+            removeHead();
+            addHead(element);
+        } else {
+            Node node = head;
+            for (int i = 0; i < index-1; i++) {
+                node = node.getNext();
+            }
+            Node setNode = new Node(element, node.getNext().getNext());
+            node.getNext().setNext(null);
+            node.setNext(setNode);
+        }  
+    }
+    
+    public E remove(int index) {
+        if(index == 0) {
+             return removeHead();
+        } else {
+            Node node = head;
+            for (int i = 0; i < index-1; i++) {
+                node = node.getNext();
+            }
+            Node remNode = node.getNext();
+            E tempEle = (E) remNode.getElement();
+            node.setNext(remNode.getNext());
+            length--;
+            if(index == length){
+                tail = node;
+            }
+            remNode.setNext(null);
+            return tempEle;
+        }
+    } 
+    /**
+     * Returns the contents of the list in csv format from head to tail.
+     * 
+     * @return the contents of the list in csv format from head to tail.
+     */
+    public String toString() {
+        String temp = "";
+        if (tail == null && head == null ) {
+            return temp;
+        } else {
+            Node node = head;
+            while (node.getNext() != null) {
+                temp += node.getElement() + ", ";
+                node = node.getNext();
+            }
+            temp += node.getElement();
+        }
+        return temp;
+    }
+    
+    private class Node<E>{
+        private E element;
+        private Node next;
+        
+        public Node(E aelement, Node nnext) {        // initialise instance variables
+            element = aelement;
+            next = nnext;
+        }
+
+        public Node getNext() {
+            // put your code here
+            return next;
+        }
+    
+        public E getElement() {
+            // put your code here
+            return element;
+        }
+    
+        public void setElement(E aelement) {
+            element = aelement;
+        }
+    
+        public void setNext(Node node) {
+            next = node;
+        }
+    }
+}
