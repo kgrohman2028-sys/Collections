@@ -26,7 +26,6 @@ public class MyRobustLinkedList<E> {
      * Adds element at beginning of list.
      *
      * @param element element to be added.
-     * @return the sum of x and y
      */
     public void addHead(E element) {
         if (isEmpty()) {
@@ -118,65 +117,111 @@ public class MyRobustLinkedList<E> {
         return length;
     }
     
-    
+    /**
+     * Adds element at end of list.
+     *
+     * @param element element to be added.
+     */
     public void add(E element) {
         addTail(element);
     }
     
+    /**
+     * Inserts element at specified index.
+     *
+     * @param index index to add into.
+     * @param element element to be added.
+     */
     public void add(int index, E element) {
-        if(index == 0) {
-            addHead(element);
+        if (index < 0 || index > length) {
+            throw new IndexOutOfBoundsException();
         } else {
-            Node node = head;
-            for (int i = 0; i < index-1; i++) {
-                node = node.getNext();
+            if(index == 0) {
+                addHead(element);
+            } else {
+                Node node = head;
+                for (int i = 0; i < index-1; i++) {
+                    node = node.getNext();
+                }
+                length++;
+                node.setNext(new Node<E>(element, node.getNext()));
             }
-            length++;
-            node.setNext(new Node<E>(element, node.getNext()));
         }
     }
     
+    /**
+     * Returns element at specified index.
+     *
+     * @param index index to pull from.
+     * 
+     * @return the element at the selected index.
+     */
     public E get(int index) {
-        Node node = head;
-        for (int i = 0; i < index; i++) {
-                node = node.getNext();
+        if (index < 0 || index > length) {
+            throw new IndexOutOfBoundsException();
+        } else {
+            Node node = head;
+            for (int i = 0; i < index; i++) {
+                    node = node.getNext();
+            }
+            return (E) node.getElement();
         }
-        return (E) node.getElement();
     }
     
+    /**
+     * Replaces existing element at specified index.
+     *
+     * @param index index to replace at.
+     * @param element element to put into the list.
+     */
     public void set(int index, E element) {
-        if(index == 0) { 
-            removeHead();
-            addHead(element);
+        if (index < 0 || index > length) {
+            throw new IndexOutOfBoundsException();
         } else {
-            Node node = head;
-            for (int i = 0; i < index-1; i++) {
-                node = node.getNext();
-            }
-            Node setNode = new Node(element, node.getNext().getNext());
-            node.getNext().setNext(null);
-            node.setNext(setNode);
-        }  
+            if(index == 0) { 
+                removeHead();
+                addHead(element);
+            } else {
+                Node node = head;
+                for (int i = 0; i < index-1; i++) {
+                    node = node.getNext();
+                }
+                Node setNode = new Node(element, node.getNext().getNext());
+                node.getNext().setNext(null);
+                node.setNext(setNode);
+            }  
+        }
     }
     
+    /**
+     *  Removes and returns element at specified index.
+     *
+     * @param index index to remove from.
+     * 
+     * @return the element removed at the selected index.
+     */
     public E remove(int index) {
-        if(index == 0) {
-             return removeHead();
+        if (index < 0 || index > length) {
+            throw new IndexOutOfBoundsException();
         } else {
-            Node node = head;
-            for (int i = 0; i < index-1; i++) {
-                node = node.getNext();
+            if(index == 0) {
+                 return removeHead();
+            } else {
+                Node node = head;
+                for (int i = 0; i < index-1; i++) {
+                    node = node.getNext();
+                }
+                Node remNode = node.getNext();
+                E tempEle = (E) remNode.getElement();
+                node.setNext(remNode.getNext());
+                length--;
+                if(index == length){
+                    tail = node;
+                }
+                remNode.setNext(null);
+                return tempEle;
             }
-            Node remNode = node.getNext();
-            E tempEle = (E) remNode.getElement();
-            node.setNext(remNode.getNext());
-            length--;
-            if(index == length){
-                tail = node;
-            }
-            remNode.setNext(null);
-            return tempEle;
-        }
+        }    
     } 
     /**
      * Returns the contents of the list in csv format from head to tail.
